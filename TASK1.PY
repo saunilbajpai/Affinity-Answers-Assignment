@@ -136,3 +136,22 @@ def parse_products(html: str) -> list:
  
     return products
  
+def display_products(products: list, search_term: str) -> None:
+    """Print extracted products to the console in a readable format.
+ 
+    Args:
+        products: List of product dicts as returned by parse_products().
+        search_term: The term the user searched for (used in the header).
+    """
+    if not products:
+        print(f'\nNo products found for "{search_term}".')
+        return
+ 
+    print(f'\nFound {len(products)} product(s) for "{search_term}":\n')
+    print(f"{'#':<4}{'Product Name':<70}{'Price'}")
+    print("-" * 90)
+    for index, product in enumerate(products, start=1):
+        name = product["name"]
+        # Truncate very long names so the columns stay aligned.
+        display_name = (name[:66] + "...") if len(name) > 69 else name
+        print(f"{index:<4}{display_name:<70}{product['price']}")
