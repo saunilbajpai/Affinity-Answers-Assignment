@@ -1,36 +1,50 @@
-# MDComputers Product Information Extractor
+# Affinity Answers Assignment
 
-A Python program to search and extract product names and selling prices from [MDComputers](https://mdcomputers.in/).
+This repository contains the solution for **Task 1: Product Information Extraction** (Web Scraping MDComputers).
 
-## Features
-- Dynamic search URL construction based on user input.
-- Sends full browser headers to avoid HTTP 403 (Forbidden) WAF blocks.
-- Parses modern OpenCart / custom MDComputers HTML templates (`product-grid-item` cards).
-- Correctly isolates current selling prices (discounted `ins` prices vs strikethrough `del` prices).
-- Formats console output into aligned columns with support for UTF-8 currency symbols.
+## Project Overview
 
-## Requirements
-- Python 3.8+
-- `requests`
-- `beautifulsoup4`
+The objective of Task 1 is to write a Python program that accepts a search term as user input, constructs a search URL for [MDComputers](https://mdcomputers.in/), fetches and parses the search results page, and extracts the product names and selling prices.
 
-To install dependencies:
+---
+
+## Directory Structure
+
+```
+Affinity-Answer assignment/
+├── ReadMe.md                          # Master project documentation
+└── question1/                         # Task 1 Solution Directory
+    ├── scraper.PY                     # Main Python scraper script
+    ├── requirements.txt               # Dependencies (requests, beautifulsoup4)
+    └── scrapingdocumentation.md       # Full technical documentation for scraper.PY
+```
+
+---
+
+## Quick Start
+
+### 1. Install Dependencies
+Navigate to the `question1` directory and install the required Python packages:
 ```bash
+cd question1
 pip install -r requirements.txt
 ```
 
-## Usage
-Run the script using Python:
+### 2. Run the Scraper
+Run `scraper.PY` using Python:
 ```bash
-python TASK1.PY
+python scraper.PY
 ```
 
-Example input and execution:
-```
+When prompted, enter your desired search term (e.g., `external hard drive`, `graphics card`, `ssd`):
+```text
 Enter search term: external hard drive
 ```
 
-## Project Structure
-- `TASK1.PY`: Main Python script for search and extraction.
-- `test.py`: Copy of script for testing.
-- `requirements.txt`: Python package dependencies.
+---
+
+## Documentation
+
+Full detailed technical documentation—including architecture, HTTP 403 WAF bypass details, DOM selector strategies, and function definitions—can be found in:
+
+👉 **[question1/scrapingdocumentation.md](file:///d:/code/Affinity-Answer%20assignment/question1/scrapingdocumentation.md)**
