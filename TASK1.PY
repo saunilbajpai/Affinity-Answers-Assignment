@@ -50,3 +50,23 @@ def build_search_url(search_term: str) -> str:
     })
 
     return urljoin(BASE_URL, "?" + query_string)
+
+
+def fetch_search_results_html(url: str) -> str:
+    """Retrieve the raw HTML of a search-results page.
+ 
+    Args:
+        url: The search URL to fetch.
+ 
+    Returns:
+        The response body as text.
+ 
+    Raises:
+        requests.RequestException: If the page cannot be retrieved
+            (network error, timeout, non-2xx status code, etc).
+    """
+    response = requests.get(
+        url, headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT_SECONDS
+    )
+    response.raise_for_status()
+    return response.text
