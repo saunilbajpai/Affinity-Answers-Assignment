@@ -155,3 +155,28 @@ def display_products(products: list, search_term: str) -> None:
         # Truncate very long names so the columns stay aligned.
         display_name = (name[:66] + "...") if len(name) > 69 else name
         print(f"{index:<4}{display_name:<70}{product['price']}")
+
+
+def main() -> None:
+    """Entry point: prompt for a search term, fetch, parse, and display."""
+    search_term = input("Enter search term: ").strip()
+ 
+    if not search_term:
+        print("Search term cannot be empty.")
+        sys.exit(1)
+ 
+    search_url = build_search_url(search_term)
+ 
+    try:
+        html = fetch_search_results_html(search_url)
+    except requests.RequestException as error:
+        print(f"Failed to retrieve search results: {error}")
+        sys.exit(1)
+ 
+    products = parse_products(html)
+    display_products(products, search_term)
+ 
+ 
+if __name__ == "__main__":
+    main()
+ 
