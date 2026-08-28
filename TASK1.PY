@@ -107,3 +107,32 @@ def _extract_selling_price(product_element) -> str:
  
     price_text = price_block.get_text(strip=True)
     return price_text if price_text else "Price not available"
+
+
+def parse_products(html: str) -> list:
+    """Parse a search-results HTML page into a list of product records.
+ 
+    Args:
+        html: Raw HTML of the search-results page.
+ 
+    Returns:
+        A list of dicts, each with keys "name" and "price". Empty list if
+        no products are found on the page.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    product_elements = soup.find_all(class_=PRODUCT_CONTAINER_CLASS)
+ 
+    products = []
+    for element in product_elements:
+        name_tag = element.find(PRODUCT_NAME_TAG)
+        if name_tag is None or not name_tag.get_text(strip=True):
+            # Doesn't look like a real product card - skip it rather than
+            # letting a malformed entry crash the whole run.
+            continue
+ 
+        product_name = name_tag.get_text(strip=True)
+        selling_price = _extract_selling_price(element)
+        products.append({"name": product_name, "price": selling_price})
+ 
+    return products
+ 
